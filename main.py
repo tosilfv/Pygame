@@ -15,16 +15,19 @@ screen = pygame.display.set_mode((scr_wid, scr_hgt))
 pygame.display.set_caption("Pygame")
 clock = pygame.time.Clock()
 framerate = 60  # Times / second
+test_font = pygame.font.Font("".join([os.path.dirname(__file__), "/font/Pixeltype.ttf"]), 50)
 
 # Setup Surface
 sur_wid = 100
 sur_hgt = 200
-# sur_color = "Red"
 sur_pos_origin = (0, 0)
-# sur_pos_custom = (200, 100)
-sky_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/Sky.png"]))
-# sky_surface = pygame.Surface((sur_wid, sur_hgt))
-# sky_surface.fill(sur_color)
+sur_pos_ground = (0, 300)
+sur_pos_text = (300, 200)
+sky_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/sky.png"])).convert_alpha()
+ground_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/ground.png"])).convert_alpha()
+text_surface = test_font.render("Hello, World!", False, "White")
+snail_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/snail/snail1.png"])).convert_alpha()
+snail_x_pos = 600
 
 while True:
     # Check all possible types of inputs
@@ -33,10 +36,15 @@ while True:
             pygame.quit()
             exit()
     
-    # Attach test surface
+    # Attach surfaces
     screen.blit(sky_surface, sur_pos_origin)
+    screen.blit(ground_surface, sur_pos_ground)
+    screen.blit(text_surface, sur_pos_text)
+    snail_x_pos -= 1
+    if snail_x_pos < -100:
+        snail_x_pos = 800
+    screen.blit(snail_surface, (snail_x_pos, 270))
 
-    # Draw all elements
-    # Update everything
+    # Draw all elements, update everything
     pygame.display.update()
     clock.tick(framerate)  # Do not run the while loop faster than framerate
