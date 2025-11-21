@@ -25,7 +25,8 @@ sur_pos_ground = (0, 300)
 sur_pos_text = (300, 200)
 sky_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/sky.png"])).convert_alpha()
 ground_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/ground.png"])).convert_alpha()
-text_surface = test_font.render("Hello, World!", False, "White")
+score_surface = test_font.render("00000", False, (64, 64, 64))
+score_rect = score_surface.get_rect(center = (400, 50))
 snail_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/snail/snail1.png"])).convert_alpha()
 snail_rect = snail_surface.get_rect(bottomright = (900, 300))
 player_surface = pygame.image.load("".join([os.path.dirname(__file__), "/graphics/player/player_walk_1.png"])).convert_alpha()
@@ -37,19 +38,34 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                print('jump')
+            # print('key pressed')
+        if event.type == pygame.KEYUP:
+            print('key released')
+
         # if event.type == pygame.MOUSEMOTION:
-        #     if player_rect.collidepoint(event.pos):
-        #         print('collision')
+            # print(event.pos)
+            # if player_rect.collidepoint(event.pos):
+            #     print('collision')
     
     # Attach surfaces
     screen.blit(sky_surface, sur_pos_origin)
     screen.blit(ground_surface, sur_pos_ground)
-    screen.blit(text_surface, sur_pos_text)
+    pygame.draw.rect(screen, '#c0e8ec', score_rect, 15)
+    pygame.draw.line(screen, '#c0e8ec', (0,0), (800, 400), 15)
+    pygame.draw.ellipse(screen, 'White', pygame.Rect(50, 200, 100, 100))
+    screen.blit(score_surface, score_rect)
     snail_rect.x -= 4
     if snail_rect.right <= 0:
         snail_rect.left = 800
     screen.blit(snail_surface, snail_rect)
     screen.blit(player_surface, player_rect)
+
+    # keys = pygame.key.get_pressed()
+    # if keys[pygame.K_SPACE]:
+    #     print('jump')
 
     # if player_rect.colliderect(snail_rect):
     #     print("Collision!")
