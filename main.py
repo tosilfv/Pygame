@@ -23,7 +23,7 @@ clock = pygame.time.Clock()
 framerate = 60  # Times / second
 test_font = pygame.font.Font("".join([os.path.dirname(__file__), "/font/Pixeltype.ttf"]), 50)
 # Game
-game_active = True
+game_active = False
 start_time = 0
 
 # Setup Surface
@@ -112,7 +112,7 @@ while True:
         # if player_rect.collidepoint(mouse_pos):
         #     print(pygame.mouse.get_pressed())
     else:
-        screen.fill("blue")
+        screen.fill((94, 129, 162))
 
     # Draw all elements, update everything
     pygame.display.update()
