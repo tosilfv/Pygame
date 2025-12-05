@@ -75,21 +75,38 @@ class Player():
                     jump_height):
         self.screen = screen
         self.gravity = gravity
+        self.player_x = player_x
+        self.player_y = player_y
         self.ground_level = ground_level
         self.jump_height = jump_height
-        self.stand = load_image(
+        self.jump_image = load_image(
+            os.path.join(
+                os.path.dirname(__file__),
+                "graphics",
+                "player",
+                "player_jump.png"))
+        self.stand_image = load_image(
             os.path.join(
                 os.path.dirname(__file__),
                 "graphics",
                 "player",
                 "player_stand.png"))
-        self.rect = self.stand.get_rect(
-            midbottom = (player_x, player_y))  # Place rectangle from midbottom
+        self.image = self.stand_image
+        # Place rectangle from midbottom
+        self.rect = self.image.get_rect(
+                    midbottom = (self.player_x, self.player_y))
+        self.jump_sound = pygame.mixer.Sound(
+            os.path.join(
+                os.path.dirname(__file__),
+                "audio",
+                "jump.mp3"))
+        self.jump_sound.set_volume(0.1)
 
     def player_input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and self.rect.bottom >= self.ground_level:
             self.gravity = self.jump_height
+            self.play_sound(self.jump_sound)
 
     def apply_gravity(self, gravity):
         self.gravity += gravity
@@ -98,11 +115,21 @@ class Player():
             self.rect.bottom = self.ground_level
 
     def draw(self):
-        self.screen.scr.blit(self.stand, self.rect)
+        self.screen.scr.blit(self.image, self.rect)
+
+    def animate(self):
+        if self.rect.bottom < self.ground_level:
+            self.image = self.jump_image
+        else:
+            self.image = self.stand_image
+
+    def play_sound(self, sound):
+        sound.play()
 
     def update(self):
         self.player_input()
         self.apply_gravity(ONE)
+        self.animate()
 
 # Initialize Pygame
 pygame.init()
