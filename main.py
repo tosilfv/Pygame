@@ -26,6 +26,9 @@ ZERO = 0
 # Variables
 running = True
 
+# Initialize Pygame
+pygame.init()
+
 # Load Image
 def load_image(path, default_color=(ZERO, 255, ZERO), default_size=(100, 100)):
     try:
@@ -215,13 +218,34 @@ class Player():
         self.apply_gravity()
         self.animate()
 
-# Initialize Pygame
-pygame.init()
+class Game:
 
-# Create Objects
+    def __init__(self, screen, background, player) -> None:
+        self.screen = screen
+        self.background = background
+        self.player = player
+
+    def run(self):
+        # Draw
+        self.background.draw()
+        self.player.draw()
+
+        # Update
+        pygame.display.update()
+        self.player.update()
+
+        # Clock
+        game.screen.clock.tick(game.screen.framerate)
+
+        # Print
+        print(f'x: {game.player.rect_x}, y: {game.player.rect_y}')
+
+
+# Create Game
 screen = Screen(SCREEN_WIDTH, SCREEN_HEIGHT, CAPTION)
 background = Background(screen, GROUND_X, GROUND_Y, SKY_X, SKY_Y)
 player = Player(screen, ZERO, PLAYER_X, PLAYER_Y)
+game = Game(screen, background, player)
 
 # Game Loop
 while running:
@@ -229,19 +253,8 @@ while running:
         if evt.type == pygame.QUIT:
             running = False
 
-    # Draw
-    background.draw()
-    player.draw()
-
-    # Update
-    pygame.display.update()
-    player.update()
-
-    # Print
-    print(f'x: {player.rect_x}, y: {player.rect_y}')
-
-    # Clock
-    screen.clock.tick(screen.framerate)
+    # Run
+    game.run()
 
 # Exit
 pygame.quit()
