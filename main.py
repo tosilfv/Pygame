@@ -1,6 +1,9 @@
 import pygame
 import os
 from sys import exit
+from utils.constants import CAPTION, FIVE, FPS, GRAVITY_MAX, GROUND_LEVEL,\
+    GROUND_X, GROUND_Y, PLAYER_X, PLAYER_Y, POINT_ONE, SCREEN_HEIGHT,\
+    SCREEN_WIDTH, SCREEN_LIMIT_L, SCREEN_LIMIT_R, SKY_X, SKY_Y, TEN, ZERO
 
 # Constants
 CAPTION = "Pygame"
@@ -10,7 +13,6 @@ GRAVITY_MAX = -150
 GROUND_LEVEL = 300
 GROUND_X = 0
 GROUND_Y = GROUND_LEVEL
-ONE = 1
 PLAYER_X = 100
 PLAYER_Y = GROUND_LEVEL
 POINT_ONE = 0.1
@@ -45,21 +47,21 @@ def load_image(path, default_color=(ZERO, 255, ZERO), default_size=(100, 100)):
 # Screen
 class Screen():
 
-    def __init__(self, width, height, caption):
-        self.scr = pygame.display.set_mode((width, height))
+    def __init__(self):
+        self.scr = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.framerate = FPS
-        pygame.display.set_caption(caption)
+        pygame.display.set_caption(CAPTION)
 
 # Background
 class Background():
 
-    def __init__(self, screen, ground_x, ground_y, sky_x, sky_y):
+    def __init__(self, screen):
         self.screen = screen
-        self.ground_x = ground_x
-        self.ground_y = ground_y
-        self.sky_x = sky_x
-        self.sky_y = sky_y
+        self.ground_x = GROUND_X
+        self.ground_y = GROUND_Y
+        self.sky_x = SKY_X
+        self.sky_y = SKY_Y
 
         self.ground_surf = load_image(
             os.path.join(
@@ -79,15 +81,15 @@ class Background():
 # Player
 class Player():
 
-    def __init__(self, screen, walk_index, player_x, player_y):
+    def __init__(self, screen):
         self.moving_horizontally = False
         self.moving_up = False
         self.moving_down = False
         self.screen = screen
         self.gravity = ZERO
-        self.player_x = player_x
-        self.player_y = player_y
-        self.walk_index = walk_index
+        self.player_x = PLAYER_X
+        self.player_y = PLAYER_Y
+        self.walk_index = ZERO
         self.jump_image = load_image(
             os.path.join(
                 os.path.dirname(__file__),
@@ -241,10 +243,10 @@ class Game:
         print(f'x: {game.player.rect_x}, y: {game.player.rect_y}')
 
 
-# Create Game
-screen = Screen(SCREEN_WIDTH, SCREEN_HEIGHT, CAPTION)
-background = Background(screen, GROUND_X, GROUND_Y, SKY_X, SKY_Y)
-player = Player(screen, ZERO, PLAYER_X, PLAYER_Y)
+# Create Objects and Game
+screen = Screen()
+background = Background(screen)
+player = Player(screen)
 game = Game(screen, background, player)
 
 # Game Loop
