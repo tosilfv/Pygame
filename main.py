@@ -5,26 +5,6 @@ from utils.constants import CAPTION, FIVE, FPS, GRAVITY_MAX, GROUND_LEVEL,\
     GROUND_X, GROUND_Y, PLAYER_X, PLAYER_Y, POINT_ONE, SCREEN_HEIGHT,\
     SCREEN_WIDTH, SCREEN_LIMIT_L, SCREEN_LIMIT_R, SKY_X, SKY_Y, TEN, ZERO
 
-# Constants
-CAPTION = "Pygame"
-FIVE = 5
-FPS = 60  # Frames per second
-GRAVITY_MAX = -150
-GROUND_LEVEL = 300
-GROUND_X = 0
-GROUND_Y = GROUND_LEVEL
-PLAYER_X = 100
-PLAYER_Y = GROUND_LEVEL
-POINT_ONE = 0.1
-SCREEN_HEIGHT = 400
-SCREEN_WIDTH = 800
-SCREEN_LIMIT_L = 35
-SCREEN_LIMIT_R = 40
-SKY_X = 0
-SKY_Y = 0
-TEN = 10
-ZERO = 0
-
 # Variables
 running = True
 
@@ -220,6 +200,7 @@ class Player():
         self.apply_gravity()
         self.animate()
 
+# Game
 class Game:
 
     def __init__(self, screen, background, player) -> None:
