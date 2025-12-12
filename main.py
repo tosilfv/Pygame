@@ -47,12 +47,12 @@ class Background():
             os.path.join(
                 os.path.dirname(__file__),
                 "graphics",
-                "ground.png"))
+                "entrance_ground_normal.png"))
         self.sky_surf = load_image(
             os.path.join(
                 os.path.dirname(__file__),
                 "graphics",
-                "sky.png"))
+                "hotel_entrance_normal.png"))
 
     def draw(self):
         self.screen.scr.blit(self.ground_surf, (self.ground_x, self.ground_y))
@@ -75,36 +75,45 @@ class Player():
                 os.path.dirname(__file__),
                 "graphics",
                 "player",
-                "player_jump.png"))
+                "piccolo_jump_normal.png"))
         self.stand_image = load_image(
             os.path.join(
                 os.path.dirname(__file__),
                 "graphics",
                 "player",
-                "player_stand.png"))
+                "piccolo_stand_normal.png"))
         walk_image_1 = load_image(
             os.path.join(
                 os.path.dirname(__file__),
                 "graphics",
                 "player",
-                "player_walk_1.png"))
+                "piccolo_walk1_normal.png"))
         walk_image_2 = load_image(
             os.path.join(
                 os.path.dirname(__file__),
                 "graphics",
                 "player",
-                "player_walk_2.png"))
+                "piccolo_walk2_normal.png"))
         self.walking = [walk_image_1, walk_image_2]
         self.image = self.stand_image
 
         # Place rectangle from midbottom
         self.rect = self.image.get_rect(
                     midbottom = (self.player_x, self.player_y))
+
+        # Music and sounds
+        self.music = pygame.mixer.Sound(
+            os.path.join(
+                os.path.dirname(__file__),
+                "audio",
+                "musa1.wav"))
+        self.music.set_volume(POINT_ONE)
+        self.music.play(loops=-1)
         self.jump_sound = pygame.mixer.Sound(
             os.path.join(
                 os.path.dirname(__file__),
                 "audio",
-                "jump.mp3"))
+                "hyppy.mp3"))
         self.jump_sound.set_volume(POINT_ONE)
 
     @property
