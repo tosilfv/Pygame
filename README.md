@@ -1,4 +1,4 @@
-# Hotel Piccolo Game
+# Pygame Hotel Piccolo Game
 
 ## Video
 
