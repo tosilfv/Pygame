@@ -35,3 +35,6 @@ TODO
 
 **[0.0.1] - Dec 12. 2025:**<br />
 _- Initial Upload with original music and artwork._<br />
+
+**[0.0.2] - Dec 14. 2025:**<br />
+_- Refactor_<br />
