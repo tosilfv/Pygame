@@ -44,5 +44,5 @@ _- Initial Upload with original music and artwork._<br />
 **[0.0.2] - Dec 13. 2025:**<br />
 _- Refactor classes._<br />
 
-**[0.0.2] - Dec 14. 2025:**<br />
+**[0.0.3] - Dec 14. 2025:**<br />
 _- Implement the Mediator pattern._<br />

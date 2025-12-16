@@ -19,12 +19,14 @@ class Background():
                 os.path.dirname(os.path.dirname(__file__)),
                 "media",
                 "graphics",
+                "hotel",
                 "entrance_ground_normal.png"))
         self.sky_surf = helpers.load_image(
             os.path.join(
                 os.path.dirname(os.path.dirname(__file__)),
                 "media",
                 "graphics",
+                "hotel",
                 "hotel_entrance_normal.png"))
 
     def draw(self):
